@@ -1,12 +1,24 @@
-FROM openjdk:8-jdk-alpine
-RUN set -x & apk update && apk upgrade && apk add --no-cache curl && apk --no-cache add openssl
-ARG mlr_version
+FROM cidasdpdasartip.cr.usgs.gov:8447/aqcu/aqcu-base:latest
 
-ADD docker-entrypoint.sh entrypoint.sh
-RUN ["chmod", "+x", "entrypoint.sh"]
+ENV repo_name=mlr-maven-centralized
+ENV artifact_id=mlrLegacy
+ENV artifact_version=0.16.0-SNAPSHOT
+RUN ./pull-from-artifactory.sh ${repo_name} gov.usgs.wma ${artifact_id} ${artifact_version} app.jar
 
-RUN curl -k -X GET "https://cida.usgs.gov/artifactory/mlr-maven-centralized/gov/usgs/wma/mlrLegacy/$mlr_version/mlrLegacy-$mlr_version.jar" > app.jar
-EXPOSE 8443
-ENTRYPOINT [ "/entrypoint.sh" ]
+ADD launch-app.sh launch-app.sh
+RUN ["chmod", "+x", "launch-app.sh"]
 
-HEALTHCHECK CMD curl -k 'https://127.0.0.1:8443/health' | grep -q '{"status":"UP"}' || exit 1
+#Default ENV Values
+ENV serverPort=443
+ENV oauthResourceTokenKeyUri=https://example.gov/oauth/token_key
+ENV oauthResourceId=resource-id
+
+ENV mlrLegacyDbHost=localhost
+ENV mlrLegacyDbPort=5435
+ENV mlrLegacyDataUsername=mlr_legacy_data
+ENV mlrLegacyDataPassword=br549
+ENV mlrLegacyServicePassword=br549
+
+ENV OAUTH_CLIENT_SECRET_PATH=/oauthClientSecret.txt
+
+ENV HEALTHY_RESPONSE_CONTAINS='{"status":"UP"}'
