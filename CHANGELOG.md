@@ -6,4 +6,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- Dockerfile docker-entrypoint.sh application.yml
+- Dockerfile 
+- docker-entrypoint.sh
+- docker-compose.env
+- docker-compose.yml
+- launch-app.sh
+- tomcat-wildcard-dev.crt
+- tomcat-wildcard-dev.csr
+- tomcat-wildcard-dev.key
+- oauthClientSecret.txt
+
+### Changed
+- Dockerfile to match pattern set by AQCU dockerfiles
+
+### Removed
+- docker-entrypoint.sh
