@@ -27,8 +27,7 @@ before_install:
   - git clone https://github.com/docker/docker-bench-security.git
 
 install:
-  - docker build -t $DOCKER_IMAGE .
-  - docker-compose -f docker-compose.yml up -d
+  - docker-compose -f docker-compose.yml up -d --build
 
 script:
   - docker ps | grep -q $DOCKER_IMAGE

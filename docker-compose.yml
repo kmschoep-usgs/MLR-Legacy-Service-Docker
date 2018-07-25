@@ -6,21 +6,18 @@
       file: ./config/certificates/tomcat/tomcat-wildcard-dev.crt
     tomcat_ssl_key:
       file: ./config/certificates/tomcat/tomcat-wildcard-dev.key
-    water_auth_secret:
-      file: ./config/oauthClientSecret.txt
 
   services:
-    mlr-notification:
+    mlr-legacy:
       build: .
-      image: mlr-legacy-service
+      image: mlr-legacy
       ports:
-        - "443:443"
+        - "8444:444"
       secrets:
         - source: tomcat_ssl_crt
           target: /tomcat-wildcard-ssl.crt
         - source: tomcat_ssl_key
           target: /tomcat-wildcard-ssl.key
-        - source: water_auth_secret
-          target: /oauthClientSecret.txt
       env_file:
-        - docker-compose.env
+        - config.env
+        - secrets.env
