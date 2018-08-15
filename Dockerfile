@@ -3,11 +3,6 @@ FROM cidasdpdasartip.cr.usgs.gov:8447/wma/wma-spring-boot-base:latest
 ENV repo_name=mlr-maven-centralized
 ENV artifact_id=mlrLegacy
 ENV artifact_version=0.16.0-SNAPSHOT
-ENV keystoreSSLKey=tomcat
-ENV keystorePassword=changeMe
-ENV keystoreLocation=/home/spring/localkeystore.pkcs12
-ENV TOMCAT_CERT_PATH=/home/spring/tomcat-wildcard-ssl.crt
-ENV TOMCAT_KEY_PATH=/home/spring/tomcat-wildcard-ssl.key
 ENV requireSsl=true
 ENV serverPort=8444
 ENV serverContextPath=/
