@@ -2,7 +2,7 @@ FROM usgswma/wma-spring-boot-base:8-jre-slim-0.0.4
 
 ENV repo_name=mlr-maven-centralized
 ENV artifact_id=mlrLegacy
-ENV artifact_version=0.17.1
+ENV artifact_version=0.17.3-SNAPSHOT
 ENV requireSsl=true
 ENV serverPort=8444
 ENV serverContextPath=/
